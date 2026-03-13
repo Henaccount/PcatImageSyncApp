@@ -1,0 +1,33 @@
+I need a C# Console app doing the following: 
+the interface offers first a folder selection
+after a folder is selected, the folder and all of its subfolders is scanned for files with *.pcat extension (those are sqlite databases, all with the same structure), 
+there will be two resulting dropdown menus containing these files for selection, the left (source) with multiselect and the right (target) with single selection mode
+The user has now to select one or more source databases on the left side and a target database on the right.
+for each *.pcat file a folder exists with the exact same name, the folder can be in the same folder as the *.pcat file or in a folder called "CatalogSupportFolder",
+ which sits on root level of the folder selected in the first step
+this database belonging folder should contain three subfolders, named "32", "64" and "200", containing png images. if these folder don't exist, please create them. 
+there can be also a "DWG" folder. the purpose of this script is to copy and rename images from the source folders (left selection) to the target folders (right single selection)
+in order to find missing images, we first scan the target *.pcat file and its belonging folder
+the target pcat (just as the source pcat files) is a SQLite database and it has a table called: "EngineeringItems".
+The relevant fields are: "PartFamilyLongDesc" (VarChar 255), "PartSizeLongDesc" (VarChar 255) and "SizeRecordId" (GUID), read them all in memory as a table
+now go through all the rows from the table and check if you find in the folder, that belongs to the pcat file, in all the three image subfolders a png image
+ where the filename contains the GUID as substring
+if such images are found in all three image subfolders, the record can be removed from the memorized table
+as a result of above a filtered table in memory remains, containing only the records where the images are missing.
+by using the "PartFamilyLongDesc" and the "PartSizeLongDesc" as criteria we want to find now for each row of the memorized table a fitting record 
+from one of the selected source databases
+if we found a record, where the criteria is met, there we read the "SizeRecordId" and then we search the belonging folder for image files that contain this "SizeRecordId"
+ in the file name
+if we found such image files (in 32/64/200 folders), then we copy them into the target folder, into the corresponding image subfolders and replace the existing GUID
+ from the file name with the GUID from the filtered, memorized table
+like this we try to find all images for the filtered, memorized table and complete the image folders of the target folder that belongs to the target pcat file.
+all selected source databases/folders will be searched. 
+if after all certain records/images cannot be found, please write a log file with all relevant information and put it into the folder, where the console app (exe) is located.
+if there is more than one hit for a "PartFamilyLongDesc" / "PartSizeLongDesc" combination across all source databases, 
+please do not copy images, but write all relevant information into the log as well.
+Iteration 1:
+ok, thank you, the code runs great, but I found a conceptional problem:
+"SizeRecordId" (GUID) is the wrong field! instead we need to work with "PartFamilyId" (GUID). can you please make all the replacements in the code? 
+The other thing is that there can we several images belonging to the "PartFamilyId" (as part of the file name of the image), 
+please make sure to find and copy all of them into the target folders. Note that when we talk about GUIDs as strings, 
+e don't want to include the leading and trailing brackets into the string.
