@@ -4,7 +4,7 @@ created (including this file) by GPT 5.4 pro extended (prompt attached as text),
 
 <img src=pcat_image_sync_infographic.png>
 
-(see also: PcatImageSyncFlowChart.png, attached)
+(see also: <a href=PcatImageSyncFlowChart.png>PcatImageSyncFlowChart.png</a>, attached)
 
 This project is a Windows-only .NET console application that opens Windows dialogs for:
 
