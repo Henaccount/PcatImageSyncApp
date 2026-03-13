@@ -6,6 +6,8 @@ created (including this file) by GPT 5.4 pro extended (prompt attached as text),
 
 (see also: <a href=PcatImageSyncFlowChart.png>PcatImageSyncFlowChart.png</a>, attached)
 
+known limitations: for valves, if the actuator IDs are different in the target catalog compared to the source catalog, then images cannot be found (this can be the case for custom actuators). This is because the image name contains the family id of the valve, but also the actuator id. The general recommendation is (anyway) to always start with a copy of an existing valve catalog (if you need a seperated valve catalog), which contains all standard actuators. 
+
 This project is a Windows-only .NET console application that opens Windows dialogs for:
 
 1. selecting the root folder that contains `.pcat` files and recursively scanning all subfolders for them
