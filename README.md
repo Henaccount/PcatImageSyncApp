@@ -1,5 +1,11 @@
 # PCAT Image Sync Console App
 
+created (including this file) by GPT 5.4 pro extended (prompt attached as text), read/check/approve the code before using, really use at own risk..
+
+<img src=pcat_image_sync_infographic.png>
+
+(see also: PcatImageSyncFlowChart.png, attached)
+
 This project is a Windows-only .NET console application that opens Windows dialogs for:
 
 1. selecting the root folder that contains `.pcat` files and recursively scanning all subfolders for them
